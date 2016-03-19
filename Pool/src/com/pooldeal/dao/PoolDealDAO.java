@@ -11,6 +11,7 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
+import com.pooldeal.domain.Category;
 import com.pooldeal.domain.Location;
 import com.pooldeal.domain.User;
 
@@ -46,13 +47,25 @@ public class PoolDealDAO extends BaseDao{
 	}
 
 	public List<Location> fetchAllLocations() {
-		DBCollection coll = db.getCollection("user");
+		DBCollection coll = db.getCollection("location");
 		DBCursor cursor = coll.find();
 		List<Location> returnList = new ArrayList<Location>();
 		while (cursor.hasNext()) { 
 		    DBObject obj = cursor.next(); 
 		    Location location = mongoTemplate.getConverter().read(Location.class, obj);  
 		    returnList.add(location); 
+		}
+		return returnList;
+	}
+	
+	public List<Category> fetchAllCategories() {
+		DBCollection coll = db.getCollection("category");
+		DBCursor cursor = coll.find();
+		List<Category> returnList = new ArrayList<Category>();
+		while (cursor.hasNext()) { 
+		    DBObject obj = cursor.next(); 
+		    Category category = mongoTemplate.getConverter().read(Category.class, obj);  
+		    returnList.add(category); 
 		}
 		return returnList;
 	}

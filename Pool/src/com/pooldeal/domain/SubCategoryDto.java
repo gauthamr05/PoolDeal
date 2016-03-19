@@ -1,11 +1,16 @@
 package com.pooldeal.domain;
 
-public class SubCategory {
+public class SubCategoryDto {
 
 	private int id;
 	private String name;
-
-
+	
+	public SubCategoryDto(int id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
+	
 	public int getId() {
 		return id;
 	}

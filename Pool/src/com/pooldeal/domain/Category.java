@@ -1,30 +1,25 @@
 package com.pooldeal.domain;
 
-import java.util.List;
-
 public class Category {
-
-	private int id;
-	private String name;
-	private List<SubCategory> subCategoryList;
-	public int getId() {
+	private String id;
+	private String category;
+	private String subCategory;
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+	public String getCategory() {
+		return category;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setCategory(String category) {
+		this.category = category;
 	}
-	public List<SubCategory> getSubCategoryList() {
-		return subCategoryList;
+	public String getSubCategory() {
+		return subCategory;
 	}
-	public void setSubCategoryList(List<SubCategory> subCategoryList) {
-		this.subCategoryList = subCategoryList;
+	public void setSubCategory(String subCategory) {
+		this.subCategory = subCategory;
 	}
-
-
 }

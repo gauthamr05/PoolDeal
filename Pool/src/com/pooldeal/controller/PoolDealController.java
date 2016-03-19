@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.pooldeal.domain.Category;
+import com.pooldeal.domain.CategoryDto;
 import com.pooldeal.domain.Location;
 import com.pooldeal.domain.User;
 import com.pooldeal.service.PoolDealService;
@@ -31,7 +31,6 @@ public class PoolDealController {
 			authBool = service.authUser(user);
 		}
 		return authBool;
-
 	}
 
 	@RequestMapping(value="/createUser", method=RequestMethod.POST)
@@ -45,6 +44,12 @@ public class PoolDealController {
 	@ResponseBody
 	public List<Location> fetchLocations() {
 		return service.fetchAllLocations();
+	}
+	
+	@RequestMapping(value="/fetchCategories", method=RequestMethod.GET)
+	@ResponseBody
+	public List<CategoryDto> fetchCategories() {
+		return service.fetchAllCategories();
 	}
 
 }
