@@ -17,8 +17,10 @@ public class PoolDealService {
 		dao.createUser(user);
 	}
 
-//	public void createUser(Registration registration) {
-//		PoolDealDAO dao = new PoolDealDAO();
-//		dao.createUser(registration);
-//	}
+	public boolean authUser(User user)
+	{
+		PoolDealDAO dao = new PoolDealDAO();
+		return dao.authUser(user);
+	}
+
 }

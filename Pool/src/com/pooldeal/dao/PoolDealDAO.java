@@ -5,19 +5,13 @@ import org.springframework.stereotype.Repository;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
-import com.pooldeal.domain.Registration;
+import com.mongodb.DBCursor;
 import com.pooldeal.domain.User;
 
 @Repository
 public class PoolDealDAO extends BaseDao{
 
 	public static DB db = getMongoConnection();
-	public boolean getUserDetails(User user)
-	{
-		return false;
-
-		//db.createCollection("user", null);
-	}
 
 
 	public void createUser(User user) {
@@ -27,11 +21,27 @@ public class PoolDealDAO extends BaseDao{
 		coll.insert(doc);
 	}
 
-//	public void createUser(Registration registration) {
-//		DBCollection coll = db.getCollection("user");
-//		BasicDBObject doc = new BasicDBObject(registration.getEmail(),registration.getPassword()).
-//	            append("password", "abc123");
-//		coll.insert(doc);
-//	}
+	public boolean authUser(User user)
+	{
+
+
+		BasicDBObject fields = new BasicDBObject();
+
+		fields.put("email", user.getEmail());
+		fields.put("password", user.getPwd());
+
+		DBCollection coll = db.getCollection("user");
+	    DBCursor cursor = coll.find(fields);
+
+	    while(cursor.hasNext())
+	    {
+	    	System.out.println(cursor.next());
+	    	return true;
+	    }
+	    return false;
+	}
+
+
+
 
 }

@@ -24,16 +24,17 @@ public class PoolDealController {
 	@RequestMapping(value="/auth", method={RequestMethod.POST})
 	@ResponseBody
 
-	public  ResponseEntity<User> AuthorizeUser()
+	public  boolean AuthorizeUser(@RequestBody User user)
 	{
-		User user = new User();
-		user.setEmail("abc");
-		user.setPwd("xyz");
-		if(true)
-        return new ResponseEntity<User>(user, HttpStatus.OK);
+		boolean authBool = false;
+		if(null != user.getEmail() && null != user.getPwd())
+		{
+			PoolDealService service = new PoolDealService();
+			authBool = service.authUser(user);
 
-		else
-			return new ResponseEntity(HttpStatus.NOT_FOUND);
+		}
+		return authBool;
+
 	}
 
 	@RequestMapping(value="/createUser", method=RequestMethod.POST)
@@ -46,10 +47,6 @@ public class PoolDealController {
 		return user;
 	}
 
-	@RequestMapping(value="/sample", method=RequestMethod.POST)
-	@ResponseBody
-	public String createUser(@RequestBody String sample) {
-		return sample;
-	}
+
 
 }
