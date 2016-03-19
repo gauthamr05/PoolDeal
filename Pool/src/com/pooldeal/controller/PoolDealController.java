@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pooldeal.domain.Category;
+import com.pooldeal.domain.Location;
 import com.pooldeal.domain.User;
 import com.pooldeal.service.PoolDealService;
 
@@ -20,18 +21,14 @@ import com.pooldeal.service.PoolDealService;
 @Controller
 public class PoolDealController {
 
-
+	PoolDealService service = new PoolDealService();
+	
 	@RequestMapping(value="/auth", method={RequestMethod.POST})
 	@ResponseBody
-
-	public  boolean AuthorizeUser(@RequestBody User user)
-	{
+	public  boolean AuthorizeUser(@RequestBody User user) {
 		boolean authBool = false;
-		if(null != user.getEmail() && null != user.getPwd())
-		{
-			PoolDealService service = new PoolDealService();
+		if(null != user.getEmail() && null != user.getPwd()) {
 			authBool = service.authUser(user);
-
 		}
 		return authBool;
 
@@ -39,14 +36,15 @@ public class PoolDealController {
 
 	@RequestMapping(value="/createUser", method=RequestMethod.POST)
 	@ResponseBody
-	public User createUser(@RequestBody User user)
-	{
-		PoolDealService service = new PoolDealService();
-
+	public User createUser(@RequestBody User user) {
 		service.createUser(user);
 		return user;
 	}
-
-
+	
+	@RequestMapping(value="/fetchLocations", method=RequestMethod.GET)
+	@ResponseBody
+	public List<Location> fetchLocations() {
+		return service.fetchAllLocations();
+	}
 
 }
